@@ -3,7 +3,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime, timedelta
 import random
-from driver_manager import Driver
 
 class WaitRandomTime:
     def __init__(self, min_seconds, max_seconds):
@@ -14,7 +13,7 @@ class WaitRandomTime:
         return datetime.now() >= self.end_time
 
 
-class LogPass():
+class LogPass:
     login_in_id = "email"
     password_in_id = "pass"
     button_enter_name = "login"
@@ -33,8 +32,15 @@ class LogPass():
         self.driver.find_element(By.XPATH, adress).click()
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, adress)))
 
-    def insert_info(self, text):
-        self.driver.find_element(By.XPATH, text).send_keys()
+    def insert_info(self, adress, text):
+        self.driver.find_element(By.XPATH, adress).send_keys(text)
+
+    def open_link(self, url):
+        self.driver.get(url)
+
+    def file_element(self, file, path):
+        self.driver.find_element(By.XPATH, file).send_keys(path)
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, file)))
 
     def is_element_present(self, by, value):
         try:

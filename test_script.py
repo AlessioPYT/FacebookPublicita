@@ -26,7 +26,7 @@ def test_publicita(driver):
     wait = WaitRandomTime(180, 520)
     logpass = LogPass(driver)
     if logpass.is_element_present(By.ID, "email"):
-        logpass.login("380631953810", "Anetto563")
+        logpass.login("123", "123")
     logpass.click_button(groups) # enter in groups
     while True: # start process of publicicta
         logpass.click_button(random_info(some_dict))  # random open one group

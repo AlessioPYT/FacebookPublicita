@@ -4,12 +4,21 @@ import pytest
 import random
 from selenium.webdriver.common.by import By
 from XPATH_info import *
+import logging
+from driver_manager import Driver
+from conftest import driver
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename='test_log.log')
+
+# def random_info(some_dict: dict):
+#     return some_dict.get(random.randint(1, len(some_dict)))
 
 def random_info(some_dict: dict):
-    return some_dict.get(random.randint(1, len(some_dict)))
+    return random.choice(list(some_dict.values()))
+
 
 def test_publicita(driver): 
+    logging.info("Starting test_publicita")
     wait = WaitRandomTime(180, 520)
     logpass = LogPass(driver)
     if logpass.is_element_present(By.ID, "email"):

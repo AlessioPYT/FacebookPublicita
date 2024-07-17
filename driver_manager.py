@@ -22,7 +22,7 @@ class Driver():
     @classmethod
     def open_browser(cls):
         cls.driver.get("https://www.facebook.com/groups/smilesofworld")
-        WebDriverWait(cls.driver, 10).until(EC.presence_of_element_located((By.ID, "email")))                        
+                                
         return cls.driver    
         
     @classmethod                                        

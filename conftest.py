@@ -26,6 +26,11 @@ else:
 
 def get_driver_options() -> UiAutomator2Options:
     options = UiAutomator2Options()
+    options.platform_name = platform_name
+    options.platform_version = platform_version
+    options.device_name = device_name
+    options.app_package = app_package
+    options.app_activity = app_activity
     options.no_reset = True
     options.udid = udid
     options.clear_device_logs_on_start = True

@@ -1,0 +1,13 @@
+
+2024-07-23 22:10:28,889 - INFO - Device connected. Using Appium conn!
+2024-07-23 22:11:24,516 - INFO - Device connected. Using Appium conn!
+2024-07-23 22:12:45,677 - INFO - Device connected. Using Appium connection!
+2024-07-23 22:13:23,543 - INFO - Device connected. Using Appium connection!
+2024-07-23 22:14:35,668 - INFO - Device connected. Using Appium connection!
+2024-07-23 22:15:00,400 - INFO - Device connected. Using Appium connection!
+2024-07-23 22:18:11,217 - INFO - Device connected. Using Appium connection!
+2024-07-23 22:28:50,345 - INFO - Device connected. Using Appium conn!
+2024-07-23 22:28:53,309 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002086D7231D0>, 'Connection to 127.0.0.1 timed out. (connect timeout=1.0)')': /status
+2024-07-23 22:28:54,310 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002086E073830>, 'Connection to 127.0.0.1 timed out. (connect timeout=1.0)')': /status
+2024-07-23 22:28:55,318 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002086E073B00>, 'Connection to 127.0.0.1 timed out. (connect timeout=1.0)')': /status
+2024-07-23 22:29:23,425 - INFO - Device connected. Using Appium conn!

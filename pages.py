@@ -1,56 +1,66 @@
-from appium.webdriver import WebElement
-from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import allure
+import logging
 
-from driver_manager import Driver
-
-class Page:
-
-    TIMEOUT = 15
-
-    def find_element_by_id(self, element_id: str):
-        resource_id = self._get_resource_id(element_id)
-        return self._wait_for_element(AppiumBy.ID, resource_id)
-    
-    def find_element_location(self, element_id):
-        element = self.find_element_by_id(element_id)
-        location = element.location
-        return location
-
-    def find_element_by_xpath(self, xpath: str):
-        return self._wait_for_element(AppiumBy.XPATH, xpath)
-
-    @classmethod
-    def _wait_for_element(cls, strategy: str, selector: str):
-        return WebDriverWait(Driver.appium_instance, cls.TIMEOUT).until(
-            expected_conditions.presence_of_element_located((strategy, selector))
-        )
-
-    @staticmethod
-    def send_keys(element: WebElement, value: str) -> None:
-        element.clear().send_keys(value)
-
-    @staticmethod
-    def _get_resource_id(element_id: str) -> str:
-        return f'{Driver.app_package}:id/{element_id}'
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename='test_log.log')
 
 
+class LogPass:
+    login_in_id = "email"
+    password_in_id = "pass"
+    button_enter_name = "login"
 
-class IntroPage(Page):
-    def __init__(self) -> None:
-        pass
+    def __init__(self, driver):
+        self.driver = driver
 
+    def login(self, login, password):
+        with allure.step("If login need"):
+            logging.info("login is normal")
+            self.driver.find_element(By.ID, self.login_in_id).clear()
+            self.driver.find_element(By.ID, self.login_in_id).send_keys(login)
+            self.driver.find_element(By.ID, self.password_in_id).clear()
+            self.driver.find_element(By.ID, self.password_in_id).send_keys(password)
+            self.driver.find_element(By.NAME, self.button_enter_name).click()
 
-    def enter_groups(self):
-        pass
+    def click_button(self, xpath):
+        with allure.step("Click button"):
+            try:
+                logging.info("Attempting to click button")
+                button = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+                button.click()
+                logging.info("Button clicked successfully")
+            except Exception as e:
+                logging.error(f"Failed to click button: {e}")
+                raise
 
-    def insert_something(self):
-        pass
+    def insert_info(self, xpath, text):
+        with allure.step("Insert text"):
+            logging.info("insert info started")
+            element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH, xpath)))
+            element.clear()
+            element.send_keys(text)
+            logging.info("insert info seccussful")
 
+    def open_link(self, url):
+        with allure.step("is url open"):
+            logging.info("open link stareted")
+            self.driver.get(url)
+            logging.info("open link succesful")
 
+    def file_element(self, xpath, file_path):
+        with allure.step("Upload file"):
+            logging.info("file element was started")
+            element = self.driver.find_element(By.XPATH, xpath)
+            element.send_keys(file_path)
+            logging.info("file element was succesful")
 
-
-def test_do_something(driver):
-    # Ваш тест здесь
-    pass
+    def is_element_present(self, by, value):
+        try:
+            logging.info(f"Checking presence of element by {by} with value {value}")
+            WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((by, value)))
+            return True
+        except Exception as e:
+            logging.error(f"Element not found: {e}")
+            return False
